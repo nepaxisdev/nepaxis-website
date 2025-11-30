@@ -1,4 +1,3 @@
-import { openNav } from "./menu";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
