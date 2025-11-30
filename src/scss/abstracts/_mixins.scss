@@ -1,0 +1,238 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+@use "sass:meta";
+@use "sass:list";
+@use "sass:map";
+@use "functions" as *;
+@use "../definitions/size-defs" as *;
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+	@if $self {
+		&,
+		&:hover,
+		&:active,
+		&:focus,
+		&:focus-within {
+			@content;
+		}
+	} @else {
+		&:hover,
+		&:active,
+		&:focus,
+		&:focus-within {
+			@content;
+		}
+	}
+}
+
+/// Make a context based selector a little more friendly
+/// @author Kitty Giraudel
+/// @param {String} $context
+@mixin when-inside($context) {
+	#{$context} & {
+		@content;
+	}
+}
+
+@mixin media($breakpoint) {
+	@media screen and (min-width: $breakpoint) {
+		@content;
+	}
+}
+
+@mixin media-x($breakpoint) {
+	@media screen and (max-width: $breakpoint) {
+		@content;
+	}
+}
+@mixin media-nx($breakpointName) {
+	@if (map.has-key($breakpoints, $breakpointName)) {
+		$key_list: map.keys($breakpoints);
+		$value: map.get($breakpoints, $breakpointName);
+		@if (list.index($key_list, $breakpointName) == list.length($key_list)) {
+			@media screen and (min-width: $value) {
+				@content;
+			}
+		} @else {
+			@media screen and (min-width: $value) and (max-width: map-get-next($breakpoints, $breakpointName, 0px)) {
+				@content;
+			}
+		}
+	}
+}
+
+@mixin reset-button {
+	//using where to lower the specificity to a minimum
+	:where(&) {
+		&,
+		&:hover,
+		&:active,
+		&:focus {
+			display: inline-block;
+			cursor: pointer;
+			border: none;
+			outline: none;
+			background-color: transparent;
+			color: var(--clr-text-color, --clr-dark-500, #000);
+			box-shadow: none;
+		}
+	}
+}
+
+// Mixins
+
+// Reset List
+//
+// Resets default list styling.
+//
+// @usage - `@include reset-list`
+//
+// Styleguide 10.1
+
+@mixin reset-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+// Hovers
+//
+// Create pseduo-classes for `:hover`, `:active`, and `:focus`.
+//
+// @usage - `@include hover`
+//
+// Styleguide 10.3
+
+@mixin hover {
+	&:hover,
+	&:active,
+	&:focus {
+		@content;
+	}
+}
+
+// Feature Detection
+//
+// $feature - Feature-specific class, i.e. `cssgradients`.
+// @usage - `@include supported($feature)`
+// @usage - `@include not-supported($feature)`
+
+@mixin supported($feature) {
+	.#{$feature} & {
+		@content;
+	}
+}
+
+@mixin not-supported($feature) {
+	.no-js &,
+	.no-#{$feature} & {
+		@content;
+	}
+}
+
+// Media Queries
+//
+// Allows you to use inline media queries. Includes options for `$fix-mqs`.
+//
+// $breakpoint - Desired breakpoint. Can be variable or unit.
+// $query - Defaults to `min-width`.
+// $type - Defaults to `screen`.
+
+@mixin mq($breakpoint, $query: "min-width", $type: "screen") {
+	@if $fix-mqs {
+		@if $fix-mqs >=$breakpoint {
+			@content;
+		}
+	} @else {
+		@media #{$type} and (#{$query}: #{$breakpoint}) {
+			@content;
+		}
+	}
+}
+
+// Clearfix
+//
+// Nicolas Gallagher's micro clearfix hack
+//
+// @source - http://nicolasgallagher.com/micro-clearfix-hack/
+
+@mixin clearfix {
+	*zoom: 1;
+
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+}
+
+// Hide Text
+//
+// @usage - `@include hide-text`
+
+@mixin hide-text {
+	overflow: hidden;
+	text-indent: 101%;
+	white-space: nowrap;
+}
+
+// Hidden
+//
+// Hide from both screenreaders and browsers
+//
+// @usage - `@include hidden`
+
+@mixin hidden {
+	display: none !important;
+	visibility: hidden;
+}
+
+// Visually Hidden
+//
+// Hide only visually, but have it available for screenreaders
+//
+// @usage - `@include visuallyhidden`
+
+@mixin visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+
+	// Extends the .visuallyhidden class to allow the element to be focusable
+	// when navigated to via the keyboard: h5bp.com/p
+
+	&.focusable {
+		&:active,
+		&:focus {
+			clip: auto;
+			height: auto;
+			margin: 0;
+			overflow: visible;
+			position: static;
+			width: auto;
+		}
+	}
+}
+
+// Invisible
+//
+// Hide visually and from screenreaders, but maintain layout
+//
+// @usage - `@include invisible`
+
+@mixin invisible {
+	visibility: hidden;
+}

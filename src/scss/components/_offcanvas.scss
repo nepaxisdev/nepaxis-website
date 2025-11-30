@@ -1,0 +1,38 @@
+.navOffCanvas {
+	--bs-offcanvas-bg: hsl(0 0% 5% / 30%);
+	--bs-offcanvas-color: var(--clr-neutral-200);
+	--bs-offcanvas-width: min(100%, 35rem);
+	--bs-offcanvas-height: 100vh;
+	--bs-offcanvas-padding-x: 2rem;
+	--bs-offcanvas-padding-y: 2rem;
+	--bs-offcanvas-border-width: 1px;
+	--bs-offcanvas-border-color: hsl(0 0% 100% / 15%);
+	--bs-offcanvas-box-shadow: var(--bs-box-shadow-sm);
+	--bs-offcanvas-transition: transform 0.3s ease-in-out, opacity 0.4s ease-out;
+	--bs-offcanvas-title-line-height: 1.5;
+	backdrop-filter: blur(0.5rem);
+	opacity: 0;
+	.offcanvas-header {
+		position: relative;
+		border-bottom: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			transform: translate(-50%, 50%);
+			width: 2px;
+			aspect-ratio: 1;
+			background-color: var(--clr-neutral-100);
+			border-radius: 100%;
+		}
+	}
+	.offcanvas-body {
+		padding: 0;
+	}
+
+	&.show:not(.hiding),
+	&.showing {
+		opacity: 1;
+	}
+}

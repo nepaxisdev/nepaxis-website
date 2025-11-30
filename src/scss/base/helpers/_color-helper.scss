@@ -1,0 +1,28 @@
+@use "../../definitions/color-defs" as c;
+
+:root {
+	@each $colorName, $shades in c.$colors {
+		@each $shadeName, $shadeValue in $shades {
+			--clr-#{$colorName}-#{$shadeName}: #{$shadeValue};
+		}
+	}
+}
+@each $colorName, $shades in c.$colors {
+	@each $shadeName, $shadeValue in $shades {
+		.#{$colorName}-#{$shadeName} {
+			color: var(--clr-#{$colorName}-#{$shadeName}, #{$shadeValue});
+		}
+		.bg-#{$colorName}-#{$shadeName} {
+			background-color: var(--clr-#{$colorName}-#{$shadeName}, #{$shadeValue});
+		}
+	}
+}
+
+.negative {
+	--set-default-color: var(--clr-neutral-100);
+	--set-default-heading-color: var(--clr-neutral-100);
+}
+
+.bg-primary-grad {
+	background: linear-gradient(262deg, var(--clr-primary-300, #023e8a) -19.74%, #d4bee3 182.35%);
+}

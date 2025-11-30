@@ -1,0 +1,23 @@
+$sizes: (
+  9: 14rem,
+  8: 12rem,
+  7: 10rem,
+  6: 8rem,
+  5: 6rem,
+  4: 4rem,
+  3: 2rem,
+  2: 1rem,
+  1: 0.5rem,
+  //xs,
+  0: 0rem
+);
+$gap-offset: 0.75em; // Gap 1 Value
+$breakpoints: (
+  sm: 0px,
+  ms: 575px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  2xl: 1400px,
+  3xl: 1500px
+);

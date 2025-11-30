@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Font Tool</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+			rel="stylesheet" />
+	</head>
+	<body>
+		<main class="content-grid pt-4">
+			<form class="mb-4 border-b-e pb-3">
+				<label for="body__size" class="form__group mb-3 w-20">
+					<div class="form__label">Root Font Size</div>
+					<div class="fl-row gap-1">
+						<div class="form__input" data-unit="px">
+							<input type="number" class="form__control" id="bodySize" name="bodySize" value="15" />
+						</div>
+						<button class="btn--primary" id="updateButton">
+							<span class="btn__wrapper"><span class="btn__text">Update</span></span>
+						</button>
+					</div>
+				</label>
+				<div class="fl-row gap-2 w-30 al-end">
+					<label for="findSizePX" class="form__group w-50">
+						<div class="form__label">px</div>
+						<div class="form__input" data-unit="px">
+							<input type="text" class="form__control" id="findSizePX" name="findSizePX" value="15" />
+							<span class="error-unit"></span>
+						</div>
+					</label>
+					<div class="icon p-1">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							class="lucide lucide-arrow-left-right-icon lucide-arrow-left-right">
+							<path d="M8 3 4 7l4 4" />
+							<path d="M4 7h16" />
+							<path d="m16 21 4-4-4-4" />
+							<path d="M20 17H4" />
+						</svg>
+					</div>
+					<label for="findSizeREM" class="form__group w-50">
+						<div class="form__label">rem</div>
+						<div class="form__input" data-unit="rem">
+							<input type="text" class="form__control" id="findSizeREM" name="findSizeREM" value="1" />
+							<span class="error-unit"></span>
+						</div>
+					</label>
+				</div>
+			</form>
+			<table id="fontMap" class="table-small">
+				<thead>
+					<tr>
+						<th class="text-center">pt</th>
+						<th>px</th>
+						<th>rem</th>
+						<th class="text-center">pt</th>
+						<th>px</th>
+						<th>rem</th>
+					</tr>
+				</thead>
+				<tbody class="font-mono"></tbody>
+			</table>
+		</main>
+
+		<script src="/js/tool.ts" type="module" defer></script>
+	</body>
+</html>

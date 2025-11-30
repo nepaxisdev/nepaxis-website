@@ -1,0 +1,72 @@
+@use "../abstracts/mixins" as *;
+@use "../definitions/size-defs" as *;
+
+.content-grid {
+	--padding-inline: 1rem;
+	--content-max-width: 100rem;
+	--breakout-max-width: 115rem;
+	--breakout-size: calc(
+		(var(--breakout-max-width) - var(--content-max-width)) / 2
+	);
+	display: grid;
+	grid-template-columns:
+		[fullwidth-start] minmax(var(--padding-inline), 1fr)
+		[breakout-start] minmax(0, var(--breakout-size))
+		[content-start]
+		min(100% - (var(--padding-inline) * 2), var(--content-max-width))
+		[content-end]
+		minmax(0, var(--breakout-size))
+		[breakout-end] minmax(var(--padding-inline), 1fr) [fullwidth-end];
+}
+
+.content-grid > * {
+	grid-column: content;
+}
+
+.content-grid > .breakout {
+	grid-column: breakout;
+}
+
+.content-grid > .full-width {
+	grid-column: fullwidth;
+}
+//todo : make this available at all breakpoints
+.content-grid {
+	@each $breakpoint, $size in $breakpoints {
+		.end {
+			&-#{$breakpoint} {
+				@include media($size) {
+					&-wrap {
+						grid-column: fullwidth / content;
+					}
+				}
+			}
+		}
+		.start {
+			&-#{$breakpoint} {
+				@include media($size) {
+					&-wrap {
+						grid-column: content / fullwidth;
+					}
+				}
+			}
+		}
+	}
+}
+
+@include media-x(992px) {
+	.content-grid > *:not(img) {
+		grid-column: content;
+	}
+}
+
+.grid__spacer {
+	display: block;
+	inline-size: calc(var(--breakout-size) / 2 - var(--padding-inline) * 2);
+	block-size: 100%;
+}
+.swiper-slide {
+	&:has(.grid__spacer) {
+		inline-size: calc(var(--breakout-size) - var(--padding-inline) * 2);
+	}
+}

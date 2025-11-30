@@ -1,0 +1,47 @@
+%icon {
+	font-family: 'Material Symbols Outlined';
+	font-size: 1.25rem;
+	line-height: 1;
+	text-align: center;
+}
+
+%reset-button {
+	outline: none;
+	background-color: transparent;
+	border: none;
+}
+
+%tag {
+	--_tag-color: var(--tag-color, --set-default-color);
+	--_tag-border: var(--tag-border, --set-default-color);
+	--_tag-background: var(--tag-background, transparent);
+	--_tag-radius: var(--tag-radius, --set-border-radius);
+	--_tag-size: var(--tag-font-size, 0.75rem);
+	--_padX: var(--tag-padX, 0.65em);
+	--_padY: var(--tag-padY, 0.5em);
+	border-radius: var(--_tag-radius);
+	padding: var(--_padY) var(--_padX) calc(var(--_padY) - 0.15em);
+	border: 1px solid var(--_tag-border);
+	background-color: var(--_tag-background);
+	color: var(--_tag-color);
+	font-size: var(--_tag-size);
+	width: fit-content;
+	user-select: none;
+	margin-bottom: 1em;
+	display: inline-block;
+	margin-bottom: 0.5em;
+}
+
+%fc-b {
+	display: flex;
+	align-items: center;
+}
+%fc-i {
+	display: flex;
+	justify-content: center;
+}
+%fc {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

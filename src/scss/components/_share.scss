@@ -1,0 +1,49 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/interfaces' as *;
+
+[class*='share-'] {
+	@extend %reset-button;
+	--_width: var(--icon-width, 2rem);
+	--_bg: var(--icon-background, hsl(0 0% 100% / 10%));
+	--_image: var(--icon-image, var(--set-link-icon));
+	--_hov-bg: var(--icon-hov-background, hsl(0 0% 100% / 20%));
+	--_hov-image: var(--icon-hov-image, var(--_image));
+	width: var(--_width);
+	aspect-ratio: 1;
+	display: block;
+	background-color: var(--_bg);
+	background-image: var(--_image);
+	background-position: center center;
+	background-size: auto 50%;
+	background-repeat: no-repeat;
+	border-radius: 100%;
+	transition: background-color 0.2s ease-out;
+
+	&:hover {
+		background-color: var(--_hov-bg);
+		background-image: var(--_hov-image);
+		transition: background-color 0.2s ease-out;
+	}
+}
+
+.share {
+	&--facebook {
+		--icon-image: var(--set-facebook-icon);
+	}
+	&--linkedin {
+		--icon-image: var(--set-linkedin-icon);
+	}
+	&--x {
+		--icon-image: var(--set-x-icon);
+	}
+}
+
+.sc__only {
+	position: absolute;
+	bottom: -100%;
+	width: 0;
+	height: 0;
+	color: transparent;
+	overflow: hidden;
+}

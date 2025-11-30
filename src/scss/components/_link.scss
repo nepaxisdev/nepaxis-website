@@ -1,0 +1,41 @@
+@use "../abstracts/interfaces" as *;
+
+.link {
+	--_color: var(--link-color);
+	display: inline-flex;
+
+	&:hover {
+		opacity: 0.8;
+	}
+	.btn__wrapper {
+		gap: 0.5em;
+	}
+	.btn__text {
+		color: var(--_color);
+		font-weight: 600;
+	}
+	&--white {
+		@extend .link;
+		--link-color: var(--clr-neutral-600);
+	}
+
+	&.link--card {
+		&:after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background-color: hsl(0 0% 100% / 5%);
+			filter: blur(3rem);
+			opacity: 0;
+			z-index: 2;
+			transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+		}
+
+		&:hover {
+			&:after {
+				opacity: 1;
+				transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+			}
+		}
+	}
+}

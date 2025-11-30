@@ -1,0 +1,170 @@
+@use "../../abstracts/mixins" as *;
+@use "../../definitions/size-defs" as *;
+
+$items: (
+	baseline: baseline,
+	center: center,
+	end: end,
+	first: first baseline,
+	inherit: inherit,
+	initial: initial,
+	last: last baseline,
+	left: left,
+	normal: normal,
+	revert: revert,
+	layer: revert-layer,
+	right: right,
+	safe: safe,
+	unsafe: unsafe,
+	unset: unset,
+	start: start,
+	between: space-between,
+	around: space-around,
+	evenly: space-evenly,
+	stretch: stretch,
+);
+$content: (
+	baseline: baseline,
+	center: center,
+	end: end,
+	first: first baseline,
+	inherit: inherit,
+	initial: initial,
+	last: last baseline,
+	left: left,
+	normal: normal,
+	revert: revert,
+	layer: revert-layer,
+	right: right,
+	safe: safe,
+	unsafe: unsafe,
+	unset: unset,
+	start: start,
+	between: space-between,
+	around: space-around,
+	evenly: space-evenly,
+	stretch: stretch,
+);
+%grid {
+	display: grid;
+}
+
+.grid {
+	display: grid;
+
+	&-w {
+		@include media(992px) {
+			&-2 {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+	}
+}
+
+@each $bName, $bp in $breakpoints {
+	@if ($bName == "sm") {
+		.grid-row {
+			display: grid;
+			grid-template-columns: repeat(12, 1fr);
+			gap: 3rem;
+		}
+		@for $i from 1 through 13 {
+			.order-#{$i} {
+				order: $i;
+			}
+			.-order-#{$i} {
+				order: $i * -1;
+			}
+			.col-#{$i} {
+				grid-column: span $i;
+			}
+			.col-start-#{$i} {
+				grid-column-start: $i;
+			}
+			.col-end-#{$i} {
+				grid-column-end: $i;
+			}
+			.grid-template-col-#{$i} {
+				display: grid;
+				grid-template-columns: repeat($i, 1fr);
+			}
+		}
+		@each $alm, $value in $items {
+			.ji-#{$alm} {
+				justify-items: $value;
+			}
+			.ai-#{$alm} {
+				align-items: $value;
+			}
+			.pi-#{$alm} {
+				place-items: $value;
+			}
+		}
+		@each $alm, $value in $content {
+			.jc-#{$alm} {
+				justify-content: $value;
+			}
+			.pc-#{$alm} {
+				place-content: $value;
+			}
+			.ac-#{$alm} {
+				align-items: $value;
+			}
+		}
+	}
+
+	@include media($bp) {
+		.grid-#{$bName}-row {
+			display: grid;
+			grid-template-columns: repeat(12, 1fr);
+			column-gap: 3rem;
+		}
+		@for $i from 1 through 13 {
+			.col-#{$bName}-#{$i} {
+				grid-column: span $i;
+			}
+			.col-start-#{$bName}-#{$i} {
+				grid-column-start: $i;
+			}
+			.col-end-#{$bName}-#{$i} {
+				grid-column-end: $i;
+			}
+			.col-end-#{$bName}-#{$i} {
+				grid-column-end: $i;
+			}
+			.grid-template-col-#{$bName}-#{$i} {
+				display: grid;
+				grid-template-columns: repeat($i, 1fr);
+			}
+			.order-#{$bName}-#{$i} {
+				order: $i;
+			}
+			.-order-#{$bName}-#{$i} {
+				order: $i * -1;
+			}
+		}
+		@each $alm, $value in $items {
+			.ji-#{$bName}-#{$alm} {
+				justify-items: $value;
+			}
+			.pi-#{$bName}-#{$alm} {
+				place-items: $value;
+			}
+			.ai-#{$bName}-#{$alm} {
+				align-items: $value;
+			}
+		}
+		@each $alm, $value in $content {
+			.jc-#{$bName}-#{$alm} {
+				justify-content: $value;
+			}
+			.pc-#{$bName}-#{$alm} {
+				place-content: $value;
+			}
+			.ac-#{$bName}-#{$alm} {
+				align-content: $value;
+			}
+		}
+	}
+}

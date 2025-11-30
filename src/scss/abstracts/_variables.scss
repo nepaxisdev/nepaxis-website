@@ -1,0 +1,16 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+$text-font-stack: "Space Grotesk", "Google Sans Mono", "Courier New", "Helvetica Neue", "Helvetica", "Arial", sans-serif !default;
+$heading-font-stack: "Space Grotesk", "Arial", sans-serif !default;
+$code-font-stack: "Space Mono", "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Monaco", monospace !default;
+$max-width: 1180px !default;
+
+///   $base-url: 'https://cdn.example.com/assets/';
+$base-url: "/assets/" !default;
+// $text-color: rgb(34, 34, 34) !default;
+// $brand-color: rgb(229, 0, 80) !default;
+// $light-grey: rgb(237, 237, 237) !default;
+// $mid-grey: rgb(153, 153, 153) !default;
+// $dark-grey: rgb(68, 68, 68) !default;

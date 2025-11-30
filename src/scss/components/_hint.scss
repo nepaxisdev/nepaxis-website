@@ -1,0 +1,38 @@
+@use '../abstracts/interfaces' as *;
+.hint {
+	&__wrapper {
+		--delay: 2s;
+		position: absolute;
+		right: 1rem;
+		top: 20rem;
+		max-width: 350px;
+		width: min(350px, 20vw);
+		border-radius: 1.25rem;
+		padding: 1.25em;
+		border: 1px solid hsla(0, 0%, 100%, 0.1);
+		background: hsla(0, 0%, 0%, 0.07);
+		box-shadow: 1rem 0.9rem 3rem 0 hsla(0, 0%, 0%, 0.25);
+		backdrop-filter: blur(1rem);
+		display: flex;
+		gap: 0.5rem;
+
+		&:not(.showing) {
+			animation: fadeOut 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) var(--delay) forwards;
+		}
+	}
+	&__icon {
+		@extend %icon;
+	}
+}
+
+@keyframes fadeOut {
+	90% {
+		transform: translateY(20%);
+		opacity: 0;
+	}
+
+	100% {
+		visibility: hidden;
+		opacity: 0;
+	}
+}

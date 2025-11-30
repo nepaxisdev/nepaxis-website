@@ -1,0 +1,148 @@
+@use "../../definitions/size-defs" as *;
+@use "../../abstracts/mixins" as *;
+@use "sass:map";
+
+/**
+This file contains helpers for spacing: Paddings(p), Margins(m) and Gaps(gap) for different breakpoints
+All margins and paddings have 7 different variants: 
+Top, Bottom, Start(left), End(Right)
+Block (Top & Bottom), Inline(Left & Right),
+General  
+**/
+$settings: (
+	p: padding,
+	m: margin,
+);
+
+// padding/margin
+@each $bName, $bp in $breakpoints {
+	@if ($bName == "sm") {
+		@for $i from 0 through 10 {
+			$gap: $gap-offset;
+			.gap-#{$i} {
+				gap: $i * $gap;
+			}
+			.col-gap-#{$i} {
+				column-gap: $i * $gap;
+			}
+			.row-gap-#{$i} {
+				row-gap: $i * $gap;
+			}
+			$widthName: $i * 10;
+
+			.w-#{$widthName} {
+				width: #{$widthName * 1%};
+			}
+			.w-auto {
+				width: auto;
+			}
+		}
+	}
+	@include media($bp) {
+		.mx-#{$bName}-auto {
+			margin-inline: auto;
+		}
+		.my-#{$bName}-auto {
+			margin-block: auto;
+		}
+		.ms-#{$bName}-auto {
+			margin-inline-start: auto;
+		}
+		.me-#{$bName}-auto {
+			margin-inline-end: auto;
+		}
+		.mt-#{$bName}-auto {
+			margin-block-start: auto;
+		}
+		.mb-#{$bName}-auto {
+			margin-block-end: auto;
+		}
+		@if ($bName == sm) {
+			.mx-auto {
+				margin-inline: auto;
+			}
+			.my-auto {
+				margin-block: auto;
+			}
+			.ms-auto {
+				margin-inline-start: auto;
+			}
+			.me-auto {
+				margin-inline-end: auto;
+			}
+			.mt-auto {
+				margin-block-start: auto;
+			}
+			.mb-auto {
+				margin-block-end: auto;
+			}
+		}
+		@each $set, $setting in $settings {
+			$dif: 0.75;
+			@each $size, $value in $sizes {
+				@if ($bName == sm) {
+					.#{$set}y-#{$size} {
+						#{$setting}-block: $value * $dif;
+					}
+					.#{$set}x-#{$size} {
+						#{$setting}-inline: $value * $dif;
+					}
+					.#{$set}s-#{$size} {
+						#{$setting}-inline-start: $value * $dif;
+					}
+					.#{$set}e-#{$size} {
+						#{$setting}-inline-end: $value * $dif;
+					}
+					.#{$set}b-#{$size} {
+						#{$setting}-block-end: $value * $dif;
+					}
+					.#{$set}t-#{$size} {
+						#{$setting}-block-start: $value * $dif;
+					}
+					.#{$set}-#{$size} {
+						#{$setting}: $value * $dif;
+					}
+				}
+
+				.#{$set}y-#{$bName}-#{$size} {
+					#{$setting}-block: $value * $dif;
+				}
+				.#{$set}x-#{$bName}-#{$size} {
+					#{$setting}-inline: $value * $dif;
+				}
+				.#{$set}s-#{$bName}-#{$size} {
+					#{$setting}-inline-start: $value * $dif;
+				}
+				.#{$set}e-#{$bName}-#{$size} {
+					#{$setting}-inline-end: $value * $dif;
+				}
+				.#{$set}b-#{$bName}-#{$size} {
+					#{$setting}-block-end: $value * $dif;
+				}
+				.#{$set}t-#{$bName}-#{$size} {
+					#{$setting}-block-start: $value * $dif;
+				}
+				.#{$set}-#{$bName}-#{$size} {
+					#{$setting}: $value * $dif;
+				}
+			}
+		}
+		@for $i from 0 through 10 {
+			$gap: $gap-offset;
+			$widthName: $i * 10;
+			$width: $widthName * 1%;
+			.gap-#{$bName}-#{$i} {
+				gap: $i * $gap;
+			}
+			.col-gap-#{$bName}-#{$i} {
+				column-gap: $i * $gap;
+			}
+			.row-gap-#{$bName}-#{$i} {
+				row-gap: $i * $gap;
+			}
+			.w-#{$bName}-#{$widthName} {
+				width: $width;
+			}
+		}
+	}
+}

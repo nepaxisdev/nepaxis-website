@@ -1,0 +1,134 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+/**
+ * Set up a decent box model on the root element
+ */
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body,
+html {
+	font-family: $text-font-stack;
+	font-feature-settings: "ss02" on;
+	font-size: var(--set-default-font-size);
+	letter-spacing: var(--set-default-letter-spacing);
+}
+
+body {
+	background-color: var(--set-body-background-color);
+	color: var(--set-default-color);
+	min-height: 100dvh;
+}
+
+%heading-font {
+	font-family: $heading-font-stack;
+	font-weight: 800;
+	font-style: normal;
+	letter-spacing: -0.03em;
+	line-height: var(--set-default-line-height);
+	.light {
+		font-weight: 600;
+	}
+	.semi {
+		font-weight: 700;
+	}
+}
+
+.fancy {
+	@extend %heading-font;
+	font-family: $heading-font-stack;
+
+	&.light {
+		font-weight: 600;
+	}
+	&.semi {
+		font-weight: 700;
+	}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@extend %heading-font;
+	margin: 0;
+}
+
+/**
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/**
+ * Basic styles for links
+ */
+a {
+	color: var(--set-link-color);
+	text-decoration: none;
+}
+
+.material-symbols-rounded,
+.material-symbols-outlined,
+.material-symbols-sharp {
+	font-size: var(--set-icon-font-size, 20px);
+	vertical-align: middle;
+}
+
+.btn {
+	border: none;
+	outline: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+p {
+	line-height: var(--set-default-paragraph-line-height);
+}
+
+.normal {
+	letter-spacing: 0;
+}
+
+img {
+	max-width: 100%;
+}
+
+.df-image-wrapper {
+	width: 100%;
+	img {
+		width: 100%;
+	}
+}
+
+.anc-full {
+	display: block;
+}
+
+[class*="heading-"] {
+	text-transform: uppercase;
+}
+
+::-moz-selection {
+	color: hsl(from var(--set-ui-highlight-color) h s 10% / 100%);
+	background: var(--set-ui-highlight-color);
+}
+
+::selection {
+	color: hsl(from var(--set-ui-highlight-color) h s 10% / 100%);
+	background: var(--set-ui-highlight-color);
+}

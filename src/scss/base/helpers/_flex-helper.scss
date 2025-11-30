@@ -1,0 +1,82 @@
+@use "../../definitions/size-defs" as *;
+@use "../../abstracts/mixins" as *;
+$alignments: (
+	center: center,
+	between: space-between,
+	start: flex-start,
+	end: flex-end,
+	around: space-around,
+	evenly: space-evenly,
+	stretch: stretch,
+);
+
+.shrink-0 {
+	flex-shrink: 0;
+}
+
+@each $breakpoint, $size in $breakpoints {
+	@include media($size) {
+		@if ($breakpoint == "sm") {
+			.fl {
+				display: flex;
+				&-row {
+					display: flex;
+					flex-direction: row;
+					&--rev {
+						display: flex;
+						flex-direction: row-reverse;
+					}
+				}
+				&-col {
+					display: flex;
+					flex-direction: column;
+					&--rev {
+						display: flex;
+						flex-direction: column-reverse;
+					}
+				}
+				&-wrap {
+					flex-wrap: wrap;
+				}
+			}
+			@each $alm, $value in $alignments {
+				.jc-#{$alm} {
+					justify-content: $value;
+				}
+				.al-#{$alm} {
+					align-items: $value;
+				}
+			}
+		}
+		.fl-#{$breakpoint} {
+			display: flex;
+			&-row {
+				display: flex;
+				flex-direction: row;
+				&--rev {
+					display: flex;
+					flex-direction: row-reverse;
+				}
+			}
+			&-col {
+				display: flex;
+				flex-direction: column;
+				&--rev {
+					display: flex;
+					flex-direction: column-reverse;
+				}
+			}
+			&-wrap {
+				flex-wrap: wrap;
+			}
+		}
+		@each $alm, $value in $alignments {
+			.jc-#{$breakpoint}-#{$alm} {
+				justify-content: $value;
+			}
+			.al-#{$breakpoint}-#{$alm} {
+				align-items: $value;
+			}
+		}
+	}
+}

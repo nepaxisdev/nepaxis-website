@@ -1,0 +1,33 @@
+@use '../abstracts/interfaces' as *;
+
+.tab,
+.project__tab {
+	&-list {
+		--justify: flex-end;
+
+		display: flex;
+		justify-content: var(--justify);
+		gap: 1em;
+		list-style: none;
+	}
+	&-button {
+		@extend %reset-button;
+		text-transform: uppercase;
+		color: var(--clr-neutral-500);
+		transition: color 0.4s ease-out;
+
+		&:hover {
+			color: var(--clr-neutral-300);
+			transition: color 0.4s ease-out;
+		}
+		&.active {
+			font-weight: 400;
+			color: var(--clr-neutral-100);
+			text-shadow: 0 0 var(--clr-neutral-500);
+			transition: color 0.4s ease-out;
+		}
+	}
+	&--center {
+		--justify: center;
+	}
+}

@@ -1,0 +1,85 @@
+@use "../abstracts/mixins" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/interfaces" as *;
+
+[class*="social--"] {
+	@extend %reset-button;
+	--_width: var(--icon-width, 1.5rem);
+	--_bg: var(--icon-background, transparent);
+	--_image: var(--icon-image, var(--set-link-icon));
+	--_hov-bg: var(--icon-hov-background);
+	--_hov-image: var(--icon-hov-image, var(--_image));
+	width: var(--_width);
+	aspect-ratio: 1;
+	display: block;
+	background-color: var(--_bg);
+	background-image: var(--_image);
+	background-position: center center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	// border-radius: 100%;
+	transition: background-color 0.2s ease-out, opacity 0.2s ease;
+
+	&:hover {
+		opacity: 0.9;
+		transition: opacity 0.2s ease;
+		background-color: var(--_hov-bg);
+		background-image: var(--_hov-image);
+		transition: background-color 0.2s ease-out;
+	}
+}
+
+.social {
+	&--facebook {
+		--icon-image: var(--set-facebook-icon);
+
+		&.social--light {
+			--icon-image: var(--set-facebook-light-icon);
+		}
+	}
+	&--linkedin {
+		--icon-image: var(--set-linkedin-icon);
+		&.social--light {
+			--icon-image: var(--set-linkedin-light-icon);
+		}
+	}
+	&--x {
+		--icon-image: var(--set-x-icon);
+		&.social--light {
+			--icon-image: var(--set-x-light-icon);
+		}
+	}
+	&--whatsapp {
+		--icon-image: var(--set-whatsapp-icon);
+		&.social--light {
+			--icon-image: var(--set-whatsapp-light-icon);
+		}
+	}
+	&--viber {
+		--icon-image: var(--set-viber-icon);
+		&.social--light {
+			--icon-image: var(--set-viber-light-icon);
+		}
+	}
+	&--instagram {
+		--icon-image: var(--set-instagram-icon);
+		&.social--light {
+			--icon-image: var(--set-instagram-light-icon);
+		}
+	}
+	&--youtube {
+		--icon-image: var(--set-youtube-icon);
+		&.social--light {
+			--icon-image: var(--set-youtube-light-icon);
+		}
+	}
+}
+
+.sc__only {
+	position: absolute;
+	bottom: -100%;
+	width: 0;
+	height: 0;
+	color: transparent;
+	overflow: hidden;
+}

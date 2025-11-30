@@ -1,0 +1,73 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass functions.
+// -----------------------------------------------------------------------------
+@use "sass:map";
+@use "sass:meta";
+@use "sass:list";
+// / Native `url(..)` function wrapper
+// / @param {String} $base - base URL for the asset
+// / @param {String} $type - asset type folder (e.g. `fonts/`)
+// / @param {String} $path - asset path
+// / @return {Url}
+@function asset($base, $type, $path) {
+    @return url($base + $type + $path);
+}
+
+/// Returns URL to an image based on its path
+/// @param {String} $path - image path
+/// @param {String} $base [$base-url] - base URL
+/// @return {Url}
+/// @require $base-url
+@function image($path, $base: $base-url) {
+    @return asset($base, "images/", $path);
+}
+
+/// Returns URL to a font based on its path
+/// @param {String} $path - font path
+/// @param {String} $base [$base-url] - base URL
+/// @return {Url}
+/// @require $base-url
+@function font($path, $base: $base-url) {
+    @return asset($base, "fonts/", $path);
+}
+
+@function map-get-next($map, $key, $fallback: false, $return: value) {
+    // Check if map is valid
+
+    @if meta.type-of($map) == map {
+        // Check if key exists in map
+        @if map.has-key($map, $key) {
+            // Init index counter variable
+            $i: 0;
+            // Init key index
+            $key-index: false;
+            // Traverse map for key
+            @each $map-key, $map-value in $map {
+                // Update index
+                $i: $i + 1;
+                // If map key found, set key index
+                @if $map-key == $key {
+                    $key-index: $i;
+                }
+                // If next index return next value or key based on $return
+                @if $i == $key-index + 1 {
+                    @if $return == key {
+                        @return $map-key;
+                    } @else {
+                        @return $map-value;
+                    }
+                }
+                // If last entry return false
+                @if $i == list.length(map.keys($map)) {
+                    @return $fallback;
+                }
+            }
+            @warn 'No next map item for key #{$key}';
+            @return $fallback;
+        }
+        @warn 'No valid key #{$key} in map';
+        @return $fallback;
+    }
+    @warn 'No valid map';
+    @return $fallback;
+}
