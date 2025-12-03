@@ -1,3 +1,5 @@
+import { NotificationModal } from "./modals";
+
 document.addEventListener("DOMContentLoaded", () => {
 	const form = document.querySelector("#contactForm") as HTMLFormElement | null;
 	if (!form) return;
@@ -32,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const validateForm = () => {
 		clearErrors();
-
 		const fullName = form.querySelector("#fullName") as HTMLInputElement;
 		const companyName = form.querySelector("#companyName") as HTMLInputElement;
 		const email = form.querySelector("#email") as HTMLInputElement;
@@ -83,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	form.addEventListener("submit", async (e) => {
 		e.preventDefault();
-		console.log("Trying to submit");
 		const isValid = validateForm();
 		if (!isValid) return;
 
@@ -103,15 +103,42 @@ document.addEventListener("DOMContentLoaded", () => {
 			});
 
 			const data = await response.json();
-
 			if (response.ok) {
+				await new NotificationModal(
+					`
+				<div class="modal__header">
+					<h5 class="modal__title">Your message has been submitted.</h5>
+				</div>
+				<div class="modal__content">
+					<p>We've received your message and will get back to you very soon.</p>
+				</div>
+		`
+				).open();
 				form.reset();
 			} else {
 				// Generic full form error — you can put this anywhere if needed
-				alert("Submission error: " + data.message);
+				await new NotificationModal(
+					`
+			<div class="modal__header">
+				<h5 class="modal__title">There was an issue.</h5>
+			</div>
+			<div class="modal__content">
+				<p>${data.message}</p>
+			</div>
+		`
+				).open();
 			}
 		} catch {
-			alert("Something went wrong.");
+			await new NotificationModal(
+				`
+			<div class="modal__header">
+				<h5 class="modal__title">Something went wrong.</h5>
+			</div>
+			<div class="modal__content">
+				<p>We are working on this issue. If it persists after some time, please email us at: <a class="link" href="mailto:support@nepaxis.com">support@nepaxis.com</a></p>
+			</div>
+		`
+			).open();
 		} finally {
 			if (submitBtn) {
 				submitBtn.textContent = originalText;
