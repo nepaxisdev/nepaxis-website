@@ -956,7 +956,7 @@
 						<h2 class="heading-2 uppercase mb-4" id="contact-title">
 							Let's Talk
 						</h2>
-						<form action="#" class="mb-lg-9 mb-4">
+						<form id="contactForm" class="mb-lg-9 mb-4">
 							<div class="grid-lg-row">
 								<div class="fl-col row-gap-3 col-gap-2 col-lg-6 mb-3 mb-md-0">
 									<label for="fullName" class="form__group">
@@ -974,7 +974,9 @@
 													name="fullName"
 													id="fullName"
 													placeholder="Full Name"
+													aria-required="true"
 												/>
+												<span class="error-message"></span>
 											</div>
 										</div>
 									</label>
@@ -993,7 +995,9 @@
 													name="companyName"
 													id="companyName"
 													placeholder="Company Name"
+													aria-required="true"
 												/>
+												<span class="error-message"></span>
 											</div>
 										</div>
 									</label>
@@ -1012,7 +1016,9 @@
 													name="email"
 													id="email"
 													placeholder="Email Address"
+													aria-required="true"
 												/>
+												<span class="error-message"></span>
 											</div>
 										</div>
 									</label>
@@ -1032,6 +1038,7 @@
 													id="phoneNumber"
 													placeholder="Phone Number"
 												/>
+												<span class="error-message"></span>
 											</div>
 										</div>
 									</label>
@@ -1051,6 +1058,7 @@
 													placeholder="Message"
 													rows="4"
 												></textarea>
+												<span class="error-message"></span>
 											</div>
 										</div>
 									</label>
@@ -1058,7 +1066,9 @@
 								<div
 									class="big__button-wrapper fl-col jc-end w-100 col-start-lg-8 col-end-lg-12"
 								>
-									<button class="btn--primary w-100 btn--full">Send</button>
+									<button class="btn--primary w-100 btn--full" type="submit">
+										Send
+									</button>
 								</div>
 							</div>
 						</form>
@@ -1222,5 +1232,6 @@
 		</main>
 		<script src="./js/main.ts" type="module"></script>
 		<script src="./js/animation.ts" type="module"></script>
+		<script src="./js/contact.ts" type="module"></script>
 	</body>
 </html>

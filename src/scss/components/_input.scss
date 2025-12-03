@@ -10,8 +10,6 @@
 		&:has(:focus-within) {
 			& + .form__group {
 				.form__input {
-					position: relative;
-
 					@include media(992px) {
 						&:after {
 							content: "Tab";
@@ -40,8 +38,6 @@
 		}
 
 		&.error {
-			margin-bottom: 2.75rem;
-
 			.form {
 				&__label {
 					color: var(--_error-color);
@@ -136,6 +132,7 @@
 		}
 	}
 	&__input {
+		position: relative;
 		inline-size: min(25rem, 100%);
 		&:has(.form__control[type="email"]) {
 			inline-size: min(40rem, 100%);
