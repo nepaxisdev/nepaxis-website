@@ -73,16 +73,15 @@
 //Button
 :root {
 	--set-button-padding-x: 1.5em;
-	--set-button-padding-y: 0.25rem;
+	--set-button-padding-y: 0.6rem;
 	--set-button-text-transform: uppercase;
 	--set-button-radius: 100vmax;
 	--set-button-gap: 0.5rem;
-	--set-button-font-size: 1rem;
+	--set-button-font-size: 14px;
 
 	@media screen and (width >= 768px) {
 		--set-button-font-size: 13px;
 		--set-button-padding-x: 1.5rem;
-		--set-button-padding-y: 0.6rem;
 		--set-button-gap: 0.5rem;
 	}
 }

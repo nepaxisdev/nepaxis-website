@@ -23,12 +23,7 @@
 			inset-inline-start: 0;
 			inset-inline-end: 0;
 			inset-block-start: 0;
-			mask: linear-gradient(
-				to bottom,
-				var(--clr-neutral-700) 0%,
-				var(--clr-neutral-700) 30%,
-				transparent
-			);
+			mask: linear-gradient(to bottom, var(--clr-neutral-700) 0%, var(--clr-neutral-700) 30%, transparent);
 			backdrop-filter: blur(0.25rem) brightness(80%);
 			block-size: 100%;
 			pointer-events: none;
@@ -90,7 +85,6 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		inline-size: calc(50vw);
 		block-size: calc(100dvh - var(--offset) - var(--offset-around));
 		border: 1px solid hsl(from var(--clr-neutral-500) h s l / 50%);
 		padding: 2rem;
@@ -100,6 +94,14 @@
 		// &-logo {
 		// 	inline-size: min(80%, 14rem);
 		// }
+
+		inline-size: 100%;
+		@media screen and (min-width: 765px) {
+			inline-size: calc(75vw);
+		}
+		@media screen and (min-width: 1336px) {
+			inline-size: calc(50vw);
+		}
 	}
 	&__list {
 		display: flex;

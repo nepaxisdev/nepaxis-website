@@ -7,7 +7,7 @@ $alignments: (
 	end: flex-end,
 	around: space-around,
 	evenly: space-evenly,
-	stretch: stretch,
+	stretch: stretch
 );
 
 .shrink-0 {
@@ -37,6 +37,9 @@ $alignments: (
 				}
 				&-wrap {
 					flex-wrap: wrap;
+				}
+				&-no-wrap {
+					flex-wrap: none;
 				}
 			}
 			@each $alm, $value in $alignments {
@@ -68,6 +71,9 @@ $alignments: (
 			}
 			&-wrap {
 				flex-wrap: wrap;
+			}
+			&-no-wrap {
+				flex-wrap: none;
 			}
 		}
 		@each $alm, $value in $alignments {

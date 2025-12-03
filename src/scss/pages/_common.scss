@@ -80,6 +80,9 @@ a.link {
 	@media screen and (max-width: 991px) {
 		font-size: 0.75rem;
 	}
+	@media screen and (max-width: 545px) {
+		font-size: 0.4rem;
+	}
 }
 
 .strip-style {
@@ -144,7 +147,7 @@ picture {
 		background: var(--background, none);
 		background-size: cover;
 		background-position: center;
-		min-height: 100dvh;
+		min-height: 100svh;
 	}
 	&__base {
 		position: absolute;
@@ -165,6 +168,12 @@ picture {
 			inline-size: 1px;
 			block-size: 4rem;
 			background-color: var(--clr-neutral-200);
+		}
+	}
+	&__subtitle {
+		font-size: 1rem;
+		@include media-x(767px) {
+			font-size: 0.9rem;
 		}
 	}
 }
@@ -201,8 +210,11 @@ picture {
 		td,
 		th {
 			inline-size: 50%;
-			padding-inline: 1rem;
 			padding-block: 0.5rem;
+
+			@include media(768px) {
+				padding-inline: 1rem;
+			}
 		}
 
 		tr {
@@ -213,6 +225,26 @@ picture {
 				border-block-end: 1px solid var(--clr-neutral-200);
 			}
 			// }
+		}
+
+		&--md {
+			@extend .capabilities__table;
+			display: none;
+			@include media(768px) {
+				display: table;
+			}
+		}
+		&--sm {
+			@extend .capabilities__table;
+			display: table;
+			@include media(768px) {
+				display: none;
+			}
+		}
+		@include media-x(767px) {
+			th {
+				padding-block-start: 2rem;
+			}
 		}
 	}
 }
@@ -225,6 +257,11 @@ picture {
 		background-repeat: no-repeat;
 		background-position: center right;
 		min-block-size: 100dvh;
+		overflow: clip;
+
+		@include media-x(991px) {
+			min-block-size: 100svh;
+		}
 	}
 }
 
@@ -235,11 +272,21 @@ picture {
 		display: block;
 		min-block-size: 70dvh;
 		position: relative;
+		overflow: clip;
+		@include media-x(991px) {
+			min-block-size: 28rem;
+		}
 
 		img {
 			position: absolute;
 			inset-inline-start: 0;
-			inset-block-end: 0;
+			inset-block-end: 1rem;
+			transform: translate(-10%) scale(1.1);
+		}
+	}
+	&__title {
+		@include media-x(767px) {
+			text-align: left;
 		}
 	}
 }
@@ -247,6 +294,7 @@ picture {
 .contact__section {
 	padding-block-end: 20rem;
 	position: relative;
+	z-index: 20;
 	&:before {
 		content: "";
 		position: absolute;
@@ -259,6 +307,10 @@ picture {
 		background-size: 100%;
 		background-position: center 115%;
 		background-blend-mode: soft-light;
+	}
+
+	@include media-x(767px) {
+		padding-block-end: 10rem;
 	}
 }
 
@@ -285,6 +337,62 @@ picture {
 			text-decoration: underline;
 			background-color: var(--set-ui-highlight-color);
 			color: hsl(from var(--set-ui-highlight-color) h s 10% / 100%);
+		}
+	}
+}
+
+.window {
+	inline-size: fit-content;
+	position: absolute;
+	max-inline-size: 50vw;
+	overflow: clip;
+
+	img {
+		inline-size: 100%;
+		pointer-events: grab;
+	}
+
+	&--1 {
+		@include media-x(767px) {
+			inline-size: 175%;
+			max-inline-size: unset;
+			inset-inline-start: 1rem;
+			inset-block-start: 2rem;
+		}
+	}
+	&--2 {
+		@include media-x(767px) {
+			inline-size: 175%;
+			max-inline-size: unset;
+			inset-inline-start: 0;
+			inset-block-end: 2rem;
+		}
+	}
+
+	&-wrapper {
+		inline-size: 100%;
+		block-size: 100%;
+		position: relative;
+	}
+
+	&__section {
+		position: relative;
+	}
+}
+
+.subtitle__wrapper {
+	h3 {
+		white-space: break-words;
+	}
+}
+
+.work {
+	&__image {
+		inline-size: 100%;
+		@include media(992px) {
+			inline-size: 100%;
+			object-fit: cover;
+			block-size: 100%;
 		}
 	}
 }
