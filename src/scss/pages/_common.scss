@@ -344,15 +344,18 @@ picture {
 .window {
 	inline-size: fit-content;
 	position: absolute;
-	max-inline-size: 50vw;
+	max-inline-size: 70vw;
 	overflow: clip;
 
 	img {
 		inline-size: 100%;
-		pointer-events: grab;
 	}
 
 	&--1 {
+		inset-inline-start: 15%;
+		inset-block-start: 25%;
+		inline-size: min(70vw, 50rem);
+
 		@include media-x(767px) {
 			inline-size: 175%;
 			max-inline-size: unset;
@@ -361,6 +364,9 @@ picture {
 		}
 	}
 	&--2 {
+		inset-inline-end: 15%;
+		inset-block-end: 25%;
+		inline-size: min(70vw, 50rem);
 		@include media-x(767px) {
 			inline-size: 175%;
 			max-inline-size: unset;
