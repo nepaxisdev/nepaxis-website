@@ -30,6 +30,7 @@
 @use "./components/social" as *;
 @use "./components/title" as *;
 @use "./components/toast" as *;
+@use "./components/hover-reveal" as *;
 
 // 4. Layout-related sections
 @use "./layout/wrapper" as *;

@@ -28,7 +28,7 @@
 
 						&:has(textarea) {
 							&:after {
-								inset-block-start: var(--_pad-y);
+								inset-block-start: var(--_pad-y, 0);
 								translate: 0 50%;
 							}
 						}

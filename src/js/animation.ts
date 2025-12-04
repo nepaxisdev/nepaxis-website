@@ -7,41 +7,7 @@ import { SplitText } from "gsap/SplitText";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 import { loaded } from "./loader";
-
-gsap.registerPlugin(
-	Draggable,
-	Flip,
-	DrawSVGPlugin,
-	ScrollTrigger,
-	ScrollSmoother,
-	SplitText,
-	InertiaPlugin
-);
-if (window.outerWidth > 991) {
-	const smooth: ScrollSmoother = ScrollSmoother.create({
-		smooth: 1,
-		effects: true,
-		smoothTouch: 0,
-	});
-	document.addEventListener("DOMContentLoaded", () => {
-		const internalLinks = document.querySelectorAll("a[data-scroll-to]");
-		internalLinks.forEach((link) => {
-			link.addEventListener("click", (e) => {
-				e.preventDefault();
-				const linkAddress = link.getAttribute("href");
-				smooth.scrollTo(linkAddress, true, "top 100px");
-			});
-		});
-	});
-}
-
-// function setFooterOffset() {
-//   const footerHeight = document.querySelector("footer")!.offsetHeight;
-//   const smoothContent: HTMLElement | null =
-//     document.querySelector(".smooth-content") || null;
-//   if (!smoothContent) return;
-//   smoothContent!.style.setProperty("--footer-offset", `${footerHeight}px`);
-// }
+import { showMenuItems } from "./hover-image";
 
 function loadDraggable() {
 	const windows = gsap.utils.toArray<HTMLElement>(".window");
@@ -102,8 +68,74 @@ function lazyLoadImages(): void {
 		});
 }
 
+function animateApproachText() {
+	const text = document.querySelector(".approach__text") || null;
+	if (!text) return;
+
+	const textSplit = SplitText.create(text, {
+		type: "lines",
+		autoSplit: true,
+		linesClass: "line",
+		onSplit: (splitText) => {
+			const lines = splitText.lines;
+
+			return gsap.to(lines, {
+				stagger: 0.7,
+				duration: 1,
+				ease: "none",
+				backgroundSize: "100%",
+				scrollTrigger: {
+					trigger: lines,
+					start: "center 80%",
+					end: "center 20%",
+					scrub: true,
+				},
+			});
+		},
+	});
+	gsap.to(textSplit.lines, {});
+}
+
+gsap.registerPlugin(
+	Draggable,
+	Flip,
+	DrawSVGPlugin,
+	ScrollTrigger,
+	ScrollSmoother,
+	SplitText,
+	InertiaPlugin
+);
+
+if (window.outerWidth > 991) {
+	const smooth: ScrollSmoother = ScrollSmoother.create({
+		smooth: 1,
+		effects: true,
+		smoothTouch: 0,
+	});
+	document.addEventListener("DOMContentLoaded", () => {
+		const internalLinks = document.querySelectorAll("a[data-scroll-to]");
+		internalLinks.forEach((link) => {
+			link.addEventListener("click", (e) => {
+				e.preventDefault();
+				const linkAddress = link.getAttribute("href");
+				smooth.scrollTo(linkAddress, true, "top 100px");
+			});
+		});
+	});
+}
+
+// function setFooterOffset() {
+//   const footerHeight = document.querySelector("footer")!.offsetHeight;
+//   const smoothContent: HTMLElement | null =
+//     document.querySelector(".smooth-content") || null;
+//   if (!smoothContent) return;
+//   smoothContent!.style.setProperty("--footer-offset", `${footerHeight}px`);
+// }
+
 window.addEventListener("load", (): void => {
 	// setFooterOffset();
+	showMenuItems();
+	animateApproachText();
 	lazyLoadImages();
 	let sectionTheme: string = "dark";
 	const mainNav: HTMLElement | null =
