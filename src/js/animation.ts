@@ -9,30 +9,30 @@ import { InertiaPlugin } from "gsap/InertiaPlugin";
 import { loaded } from "./loader";
 
 gsap.registerPlugin(
-  Draggable,
-  Flip,
-  DrawSVGPlugin,
-  ScrollTrigger,
-  ScrollSmoother,
-  SplitText,
-  InertiaPlugin
+	Draggable,
+	Flip,
+	DrawSVGPlugin,
+	ScrollTrigger,
+	ScrollSmoother,
+	SplitText,
+	InertiaPlugin
 );
 if (window.outerWidth > 991) {
-  const smooth: ScrollSmoother = ScrollSmoother.create({
-    smooth: 1,
-    effects: true,
-    smoothTouch: 0,
-  });
-  document.addEventListener("DOMContentLoaded", () => {
-    const internalLinks = document.querySelectorAll("a[data-scroll-to]");
-    internalLinks.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const linkAddress = link.getAttribute("href");
-        smooth.scrollTo(linkAddress, true, "top 100px");
-      });
-    });
-  });
+	const smooth: ScrollSmoother = ScrollSmoother.create({
+		smooth: 1,
+		effects: true,
+		smoothTouch: 0,
+	});
+	document.addEventListener("DOMContentLoaded", () => {
+		const internalLinks = document.querySelectorAll("a[data-scroll-to]");
+		internalLinks.forEach((link) => {
+			link.addEventListener("click", (e) => {
+				e.preventDefault();
+				const linkAddress = link.getAttribute("href");
+				smooth.scrollTo(linkAddress, true, "top 100px");
+			});
+		});
+	});
 }
 
 // function setFooterOffset() {
@@ -44,133 +44,135 @@ if (window.outerWidth > 991) {
 // }
 
 function loadDraggable() {
-  const windows = gsap.utils.toArray<HTMLElement>(".window");
+	const windows = gsap.utils.toArray<HTMLElement>(".window");
 
-  windows.forEach((windowItem: HTMLElement) => {
-    Draggable.create(windowItem, {
-      bounds: ".window-wrapper",
-    });
-  });
+	windows.forEach((windowItem: HTMLElement) => {
+		Draggable.create(windowItem, {
+			bounds: ".window-wrapper",
+		});
+	});
 }
 
 function lazyLoadImages(): void {
-  gsap.utils
-    .toArray<HTMLImageElement>(".lazy")
-    .forEach((image: HTMLImageElement) => {
-      const newSRC: string | null = image.dataset.src || null;
-      if (!newSRC) return;
+	gsap.utils
+		.toArray<HTMLImageElement>(".lazy")
+		.forEach((image: HTMLImageElement) => {
+			const newSRC: string | null = image.dataset.src || null;
+			if (!newSRC) return;
 
-      const newImage: HTMLImageElement = document.createElement("img");
+			const newImage: HTMLImageElement = document.createElement("img");
 
-      const loadImage = (): void => {
-        newImage.onload = () => {
-          newImage.onload = null;
-          image.src = newSRC;
-          gsap.set(newImage, {
-            position: "absolute",
-            top: image.offsetTop,
-            left: image.offsetLeft,
-            width: image.offsetWidth,
-            height: image.offsetHeight,
-          });
-          if (image.parentNode) {
-            image.parentNode.appendChild(newImage);
-          }
+			const loadImage = (): void => {
+				newImage.onload = () => {
+					newImage.onload = null;
+					image.src = newSRC;
+					gsap.set(newImage, {
+						position: "absolute",
+						top: image.offsetTop,
+						left: image.offsetLeft,
+						width: image.offsetWidth,
+						height: image.offsetHeight,
+					});
+					if (image.parentNode) {
+						image.parentNode.appendChild(newImage);
+					}
 
-          gsap.to(newImage, {
-            opacity: 0,
-            onComplete: () => {
-              if (newImage.parentNode) {
-                newImage.parentNode.removeChild(newImage);
-              }
-            },
-          });
+					gsap.to(newImage, {
+						opacity: 0,
+						onComplete: () => {
+							if (newImage.parentNode) {
+								newImage.parentNode.removeChild(newImage);
+							}
+						},
+					});
 
-          if (st) {
-            st.kill();
-          }
-        };
-        newImage.src = newSRC;
-      };
+					if (st) {
+						st.kill();
+					}
+				};
+				newImage.src = newSRC;
+			};
 
-      let st: ScrollTrigger | null = ScrollTrigger.create({
-        trigger: image,
-        start: "-50% bottom",
-        onEnter: loadImage,
-        onEnterBack: loadImage,
-      });
-    });
+			let st: ScrollTrigger | null = ScrollTrigger.create({
+				trigger: image,
+				start: "-50% bottom",
+				onEnter: loadImage,
+				onEnterBack: loadImage,
+			});
+		});
 }
 
 window.addEventListener("load", (): void => {
-  // setFooterOffset();
-  lazyLoadImages();
-  let sectionTheme: string = "dark";
-  const mainNav: HTMLElement | null =
-    document.querySelector<HTMLElement>("#headerNav");
-  if (!mainNav) return;
-  const sections: NodeListOf<HTMLElement> =
-    document.querySelectorAll<HTMLElement>("[data-section]");
-  if (window.outerWidth > 545) {
-    loadDraggable();
-  }
-  sections.forEach((section: HTMLElement) => {
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top 2%",
-      end: "bottom 2%",
-      onEnter: () => {
-        const theme = section.getAttribute("data-section");
-        console.log(theme);
-        if (theme) {
-          sectionTheme = theme;
-        }
-      },
-      onToggle: (self: ScrollTrigger) => {
-        if (self.isActive) {
-          const theme = section.getAttribute("data-section");
-          if (theme) {
-            sectionTheme = theme;
-          }
-          switch (sectionTheme) {
-            case "light":
-              mainNav.setAttribute("data-logo-active", "dark");
-              break;
-            case "dark":
-              mainNav.setAttribute("data-logo-active", "light");
-              break;
-            case "invert":
-              mainNav.setAttribute("data-logo-active", "invert");
-              break;
-            default:
-              break;
-          }
-        }
-      },
-    });
-  });
+	// setFooterOffset();
+	lazyLoadImages();
+	let sectionTheme: string = "dark";
+	const mainNav: HTMLElement | null =
+		document.querySelector<HTMLElement>("#headerNav");
+	if (!mainNav) return;
+	const sections: NodeListOf<HTMLElement> =
+		document.querySelectorAll<HTMLElement>("[data-section]");
 
-  ScrollTrigger.create({
-    trigger: ".approach__section",
-    start: "top 90%",
-    end: "bottom top",
-    toggleActions: "play pause resume pause",
-    onEnter: () => {
-      gsap.to(".approach__image", {
-        rotate: "random(-30, 30)",
-        duration: 30,
-        scale: "random(1.1, 1.3)",
-        opacity: "random(0.4, 0.6)",
-        ease: "ease",
-        yoyo: true,
-      });
-    },
-  });
+	if (window.outerWidth > 545) {
+		loadDraggable();
+	}
 
-  ScrollTrigger.getAll().forEach((st: ScrollTrigger) => st.disable());
+	sections.forEach((section: HTMLElement) => {
+		ScrollTrigger.create({
+			trigger: section,
+			start: "top 2%",
+			end: "bottom 2%",
+			onEnter: () => {
+				const theme = section.getAttribute("data-section");
+				if (theme) {
+					sectionTheme = theme;
+				}
+			},
+			onToggle: (self: ScrollTrigger) => {
+				if (self.isActive) {
+					const theme = section.getAttribute("data-section");
+					if (theme) {
+						sectionTheme = theme;
+					}
+					switch (sectionTheme) {
+						case "light":
+							mainNav.setAttribute("data-logo-active", "dark");
+							break;
+						case "dark":
+							mainNav.setAttribute("data-logo-active", "light");
+							break;
+						case "invert":
+							mainNav.setAttribute("data-logo-active", "invert");
+							break;
+						default:
+							break;
+					}
+				}
+			},
+		});
+	});
 
-  loaded.then(() => {
-    ScrollTrigger.getAll().forEach((st: ScrollTrigger) => st.enable());
-    ScrollTrigger.refresh();
-  });
+	ScrollTrigger.create({
+		trigger: ".approach__section",
+		start: "top 90%",
+		end: "bottom top",
+		toggleActions: "play pause resume pause",
+		onEnter: () => {
+			gsap.to(".approach__image", {
+				rotate: "random(-30, 30)",
+				duration: 30,
+				scale: "random(1.1, 1.3)",
+				opacity: "random(0.4, 0.6)",
+				ease: "ease",
+				yoyo: true,
+			});
+		},
+	});
+
+	if (loaded) {
+		ScrollTrigger.getAll().forEach((st: ScrollTrigger) => st.disable());
+		loaded.then(() => {
+			ScrollTrigger.getAll().forEach((st: ScrollTrigger) => st.enable());
+			ScrollTrigger.refresh();
+		});
+	}
 });

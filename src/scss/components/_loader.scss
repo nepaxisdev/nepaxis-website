@@ -1,0 +1,42 @@
+@use "../abstracts/variables" as *;
+@use "../base/helpers/type-helper" as *;
+.loading {
+	&__screen {
+		position: fixed;
+		inset: 0;
+		z-index: 999999;
+		inline-size: 100%;
+		block-size: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: var(--clr-neutral-700);
+	}
+	&__value {
+		font-family: $code-font-stack;
+		@extend .heading-5;
+		position: relative;
+		z-index: 1;
+
+		&:before {
+			content: "";
+			position: absolute;
+			inset-inline-start: 50%;
+			inset-block-start: 50%;
+			translate: -50% -50%;
+			background-color: var(--clr-neutral-700);
+			border-radius: 100%;
+			aspect-ratio: 1;
+			inline-size: 150%;
+			z-index: -1;
+			filter: blur(1rem);
+		}
+	}
+	&__background {
+		position: absolute;
+		inset: 0;
+		inline-size: 100%;
+		block-size: 100%;
+		z-index: -1;
+	}
+}

@@ -10,7 +10,8 @@ function getDecimalPlaces(num: number): number {
 	if (parts.length === 1) return num;
 	const decimalPart = parts[1];
 	if (decimalPart.length <= 2) {
-		if (Number(decimalPart.charAt(-1)) === 0) return parseFloat(parts[0] + "." + decimalPart.slice(0, 1));
+		if (Number(decimalPart.charAt(-1)) === 0)
+			return parseFloat(parts[0] + "." + decimalPart.slice(0, 1));
 	}
 	return parseFloat(num.toFixed(2));
 }
@@ -36,7 +37,9 @@ function mapTable(tableOutput: HTMLTableElement, fontSize: number): void {
 				</div>
 			</td>
 			<td>
-			<div class="fl-row al-center gap-1" data-clipboard-text="${getDecimalPlaces(i / fontSize)}rem">
+			<div class="fl-row al-center gap-1" data-clipboard-text="${getDecimalPlaces(
+				i / fontSize
+			)}rem">
 				<span>${getDecimalPlaces(i / fontSize)}<span class="unit">rem</span> </span>
 				<span class="sr-only">Copy ${i} pixels as rem to clipboard</span>	
 				<span class="copy-area fl-row al-center jc-center">
@@ -45,7 +48,9 @@ function mapTable(tableOutput: HTMLTableElement, fontSize: number): void {
 				</span>
 			</div>
 			</td>
-			<td class="text-center" style="background-color:hsl(0 0% 5%);inline-size:2rem">${i + 1}</td>
+			<td class="text-center" style="background-color:hsl(0 0% 5%);inline-size:2rem">${
+				i + 1
+			}</td>
 			<td>
 				<div class="fl-row al-center gap-1" data-clipboard-text="${i + 1}px">
 					<span>${i + 1}<span class="unit">px</span></span>
@@ -57,8 +62,12 @@ function mapTable(tableOutput: HTMLTableElement, fontSize: number): void {
 				</div>
 			</td>
 			<td>
-			<div class="fl-row al-center gap-1" data-clipboard-text="${getDecimalPlaces((i + 1) / fontSize)}rem">
-				<span>${getDecimalPlaces((i + 1) / fontSize)}<span class="unit">rem</span> </span>
+			<div class="fl-row al-center gap-1" data-clipboard-text="${getDecimalPlaces(
+				(i + 1) / fontSize
+			)}rem">
+				<span>${getDecimalPlaces(
+					(i + 1) / fontSize
+				)}<span class="unit">rem</span> </span>
 				<span class="sr-only">Copy ${i + 1} pixels as rem to clipboard</span>	
 				<span class="copy-area fl-row al-center jc-center">
 						<svg xmlns="http://www.w3.org/2000/svg" class="copy-icon neutral-500" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy-icon lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
@@ -71,7 +80,9 @@ function mapTable(tableOutput: HTMLTableElement, fontSize: number): void {
 	}
 }
 function initializeCopier() {
-	const copyButtons = document.querySelectorAll<HTMLElement>("[data-clipboard-text]");
+	const copyButtons = document.querySelectorAll<HTMLElement>(
+		"[data-clipboard-text]"
+	);
 	copyButtons.forEach((button) => {
 		button.addEventListener("click", () => {
 			const textToCopy = button.getAttribute("data-clipboard-text");
@@ -90,10 +101,18 @@ function initializeCopier() {
 	});
 }
 document.addEventListener("DOMContentLoaded", () => {
-	let fontSizeInput: HTMLInputElement = document.querySelector("#bodySize") as HTMLInputElement;
-	let tableOutput: HTMLTableElement = document.querySelector("#fontMap") as HTMLTableElement;
-	let fontSize: number = fontSizeInput.value ? parseInt(fontSizeInput.value) : 16;
-	const updateButton: HTMLButtonElement = document.querySelector("#updateButton") as HTMLButtonElement;
+	let fontSizeInput: HTMLInputElement = document.querySelector(
+		"#bodySize"
+	) as HTMLInputElement;
+	let tableOutput: HTMLTableElement = document.querySelector(
+		"#fontMap"
+	) as HTMLTableElement;
+	let fontSize: number = fontSizeInput.value
+		? parseInt(fontSizeInput.value)
+		: 16;
+	const updateButton: HTMLButtonElement = document.querySelector(
+		"#updateButton"
+	) as HTMLButtonElement;
 
 	updateButton.addEventListener("click", (e) => {
 		e.preventDefault();
@@ -104,7 +123,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	mapTable(tableOutput, fontSize);
 	initializeCopier();
 
-	const valueInputWrappers = document.querySelectorAll<HTMLInputElement>("[data-unit]");
+	const valueInputWrappers =
+		document.querySelectorAll<HTMLInputElement>("[data-unit]");
 
 	valueInputWrappers.forEach((item) => {
 		const input = item.querySelector<HTMLInputElement>("input")!;
@@ -112,7 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		input.addEventListener("keyup", (e) => {
 			e.preventDefault();
 			const value = input.value;
-			console.log(value);
 			if (isNaN(Number(value))) {
 				if (unit) {
 					if (reg_tests[unit as keyof typeof reg_tests].test(value)) {
