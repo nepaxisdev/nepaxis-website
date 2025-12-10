@@ -5,23 +5,25 @@ import { initASCIIAnimations } from "./ascii";
 import { initShowMenuImages } from "./hover-image";
 import { initApproachSectionAnimations } from "./scroll-timelines/approach";
 import { initDraggable } from "./draggable";
+import { initTextScramble } from "./text-scramble";
 //start initializing animation modules
 
 export function initAnimations() {
-	// this is required throughout the timeline
-	initSmoothScroll();
-	initLazyLoadImages();
-	initHeaderAnimations();
+  // this is required throughout the timeline
+  initSmoothScroll();
+  initLazyLoadImages();
+  initHeaderAnimations();
 
-	// Temporarily here move this into individual scrollTrigger Animations to minimize performance load
-	initShowMenuImages();
-	initApproachSectionAnimations();
-	initDraggable();
-	// initHeroAnimations();
+  // Temporarily here move this into individual scrollTrigger Animations to minimize performance load
+  initShowMenuImages();
+  initApproachSectionAnimations();
+  initDraggable();
+  // initHeroAnimations();
 
-	document.fonts.ready.then(() => {
-		initASCIIAnimations();
-	});
+  document.fonts.ready.then(() => {
+    initASCIIAnimations();
+    initTextScramble();
+  });
 }
 
 //we will defer playing section animations after load.
