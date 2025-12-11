@@ -17,6 +17,13 @@
 		[content-end]
 		minmax(0, var(--breakout-size))
 		[breakout-end] minmax(var(--padding-inline), 1fr) [fullwidth-end];
+
+	@include media-x(100rem) {
+		--padding-inline: 2rem;
+	}
+	@include media-x(545px) {
+		--padding-inline: 1rem;
+	}
 }
 
 .content-grid > * {

@@ -79,11 +79,12 @@ a.link {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding-inline: 2rem;
 		perspective: 500px;
+		z-index: 0;
 		@extend .py-2;
 
 		@include media(768px) {
+			padding-inline: 2rem;
 			padding-block: 8rem;
 		}
 		@include media(1200px) {
@@ -229,6 +230,9 @@ picture {
 	text-align: center;
 }
 .capabilities {
+	&__section {
+		overflow: clip;
+	}
 	&__table {
 		td,
 		th {
@@ -374,7 +378,9 @@ picture {
 .info {
 	&-wrapper {
 		&--right {
-			border-inline-start: 1px solid var(--clr-neutral-600);
+			@include media(768px) {
+				border-inline-start: 1px solid var(--clr-neutral-600);
+			}
 		}
 	}
 }
@@ -468,6 +474,77 @@ picture {
 			inline-size: 100%;
 			object-fit: cover;
 			block-size: 100%;
+		}
+	}
+}
+
+.cube {
+	inline-size: var(--width);
+	aspect-ratio: 1;
+	transform-style: preserve-3d;
+	// transform-origin: var(--z-translate) var(--z-translate) var(--z-translate);
+	&-container {
+		--width: 15rem;
+		--z-translate: calc(var(--width) / 2);
+		--background: lightcyan;
+		perspective: calc(var(--width) * 3.33);
+		padding: 4rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		inline-size: 100%;
+		min-block-size: 70svh;
+		@include media(992px) {
+			min-block-size: unset;
+			aspect-ratio: 1;
+		}
+		transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+		&:hover,
+		&:has(.cube:hover) {
+			transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+			.cube-face {
+				background-color: hsl(from var(--background) h s 95% / 90%);
+				box-shadow: 0 0 5em -1em hsl(from var(--background) h s 70% / 90%);
+				transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+			}
+		}
+	}
+	&-face {
+		inline-size: var(--width);
+		aspect-ratio: 1;
+		font-family: $code-font-stack;
+		color: var(--clr-neutral-700);
+		text-transform: uppercase;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		text-align: center;
+		font-size: small;
+		border: 1px solid var(--clr-neutral-500);
+		box-shadow: 0 0 5em -1em var(--clr-neutral-200);
+		background-color: hsl(from var(--clr-neutral-200) h s 95% / 90%);
+		transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+		border-radius: 1rem;
+
+		&.front {
+			transform: translateZ(var(--z-translate));
+		}
+		&.back {
+			transform: rotateY(180deg) translateZ(var(--z-translate));
+		}
+		&.top {
+			transform: rotateX(90deg) translateZ(var(--z-translate));
+		}
+		&.bottom {
+			transform: rotateX(-90deg) translateZ(var(--z-translate));
+		}
+		&.left {
+			transform: rotateY(-90deg) translateZ(var(--z-translate));
+		}
+		&.right {
+			transform: rotateY(90deg) translateZ(var(--z-translate));
 		}
 	}
 }
