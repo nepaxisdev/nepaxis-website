@@ -74,7 +74,7 @@ export function handleNewsLetter() {
 				<h5 class="modal__title">There was an issue.</h5>
 			</div>
 			<div class="modal__content">
-				<p>${data.message}</p>
+				<p>${data.message || data.detail}</p>
 			</div>
 		`
 				).open();

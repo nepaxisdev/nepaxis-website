@@ -18,7 +18,6 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 	}
 
 	try {
-		console.log(req.body);
 		const { email } = req.body as SubscribeBody;
 		if (!email) {
 			return res.status(400).json({ message: "Email is required" });
