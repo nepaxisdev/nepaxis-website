@@ -6,12 +6,12 @@
 Project overview and file reference for the Nepaxis workspace.
 This README explains the purpose of the main files and folders in the repository and where to look for common functionality. The `node_modules/` and `public/` directories are intentionally omitted from detailed explanation.
 
-**External Services Used**
+## External Services Used
 
 1. Mailchimp For Newsletter Service
 2. Web3Forms for Submitting Contact Form
 
-**Dependencies**
+## Dependencies
 
 1. Vite
 2. TypeScript
@@ -23,7 +23,7 @@ This README explains the purpose of the main files and folders in the repository
    3. Scramble Text Plugin
    4. Draggable
 
-**Project Structure**
+## Project Structure\*\*
 
 - `package.json`: Project manifest; contains scripts, dependencies, and basic metadata used by npm/yarn.
 - `TREE.md`: (Optional) text representation or snapshot of the repository tree.
@@ -71,7 +71,7 @@ This README explains the purpose of the main files and folders in the repository
   - `index.html`: A lightweight UI for the tool or local testing harness.
   - `tool.ts`: Script backing the development tool.
 
-**Notes & Where To Look For Things**
+## Notes & Where To Look For Things
 
 - Frontend entry: `src/js/main.ts` and `src/index.html`.
 - Styling: `src/scss/styles.scss` imports everything; edit partials in `abstracts/`, `components/` or `layout/`.
@@ -81,7 +81,7 @@ This README explains the purpose of the main files and folders in the repository
 - Build & dev: Run scripts from `package.json` (e.g., `dev`, `build`, `preview`) which use Vite and the `vite.config.ts` settings.
 - Build & dev: Run scripts from `package.json` (e.g., `dev`, `build`, `preview`) which use Vite and the `vite.config.ts` settings.
 
-**Scripts**
+## Scripts
 
 Common scripts defined in `package.json`. Run them with `npm run <script>` (or `pnpm <script>` / `yarn <script>` depending on your package manager):
 
@@ -91,12 +91,12 @@ npm run build    # compile TypeScript and produce a production build (tsc && vit
 npm run preview  # preview the production build locally (vite preview)
 ```
 
+- `dev`: Runs the Vite dev server for local development and HMR.
+- `build`: Runs `tsc` then `vite build` to create the production bundle.
+- `preview`: Serves the built output locally so you can test the production build.
+
 ```bash
 npm install -g vercel   # to be able to use the api/subscribe.ts function in local environment
 vercel login            # login to vercel
 vercel dev              # run vercel server on localhost:3000
 ```
-
-- `dev`: Runs the Vite dev server for local development and HMR.
-- `build`: Runs `tsc` then `vite build` to create the production bundle.
-- `preview`: Serves the built output locally so you can test the production build.
