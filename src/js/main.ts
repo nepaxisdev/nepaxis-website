@@ -6,6 +6,7 @@ import { initCube } from "./components/cube";
 import { initLoading } from "./components/loader";
 import { handleContact } from "./components/contact";
 import { handleNewsLetter } from "./components/newsletter";
+import { initFooterYear } from "./components/legal";
 
 document.addEventListener("DOMContentLoaded", () => {
 	initHeroITLTimes();
@@ -15,4 +16,5 @@ document.addEventListener("DOMContentLoaded", () => {
 	initLoading();
 	handleContact();
 	handleNewsLetter();
+	initFooterYear();
 });
